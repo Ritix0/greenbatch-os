@@ -95,7 +95,7 @@ h1, h2, h3 {
 
 /* --- Файл: src/index.css (Добавить в конец) --- */
 
-/* Стили шапки */
+/* --- СТИЛИ ШАПКИ (ОБНОВЛЕННЫЕ) --- */
 .app-header {
   display: flex;
   justify-content: space-between;
@@ -103,12 +103,14 @@ h1, h2, h3 {
   padding: 15px 0;
   margin-bottom: 20px;
   border-bottom: 1px solid #333;
+  gap: 10px; /* Отступ между названием и кнопками */
 }
 
 .header-brand {
   font-weight: bold;
   font-size: 1.2em;
-  white-space: nowrap; /* Запрет переноса текста заголовка */
+  white-space: nowrap; /* ЗАПРЕТ ПЕРЕНОСА СТРОК */
+  flex-shrink: 0; /* Запрещаем сжимать название */
 }
 
 .header-right {
@@ -120,20 +122,26 @@ h1, h2, h3 {
 .lang-buttons {
   display: flex;
   gap: 5px;
+  align-items: center; /* Выравнивание кнопок по центру */
 }
 
 .lang-btn {
   background: transparent;
   border: 1px solid #444;
-  padding: 5px 8px;
-  font-size: 0.75em;
+  padding: 6px 10px;
+  font-size: 0.8em;
+  border-radius: 6px;
+  cursor: pointer;
+  color: #fff;
   width: auto;
-  margin: 0; /* Убираем лишние отступы */
+  margin: 0;
+  line-height: 1; /* Чтобы текст в кнопке стоял ровно по центру */
 }
 
 .lang-btn.active {
-  background: #646cff;
-  border: none;
+  background: #646cff; /* Синий цвет активной кнопки */
+  border-color: #646cff;
+  font-weight: bold;
 }
 
 .header-divider {
@@ -162,24 +170,29 @@ h1, h2, h3 {
   margin-top: 2px;
   text-align: right;
   border: none;
+  cursor: pointer;
 }
 
 /* === МОБИЛЬНАЯ АДАПТАЦИЯ === */
 @media (max-width: 600px) {
   .user-email {
-    display: none; /* Скрываем длинную почту на телефоне */
+    display: none; /* Скрываем почту на телефоне */
   }
   
   .header-brand {
-    font-size: 1em; /* Чуть уменьшаем заголовок */
+    font-size: 1em; /* Уменьшаем шрифт названия */
   }
   
+  .app-header {
+    padding: 10px 0; /* Чуть меньше отступов сверху/снизу */
+  }
+
   .header-right {
-    gap: 10px; /* Уменьшаем отступы между кнопками */
+    gap: 10px; /* Сближаем элементы справа */
   }
   
-  /* Выравниваем кнопки языка */
-  .lang-buttons {
-    align-items: center;
+  .lang-btn {
+    padding: 5px 8px; /* Кнопки языка чуть компактнее */
+    font-size: 0.75em;
   }
 }
