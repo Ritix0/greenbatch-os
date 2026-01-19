@@ -137,5 +137,22 @@ We reserve the right to modify these terms or the pricing model (for future PRO 
     delete_desc: 'You are about to delete ALL your data (crops, batches, settings). This action cannot be undone.',
     delete_confirm_btn: 'Yes, Delete Everything',
     deleting: 'Deleting...',
+  },
+  landing: {
+    hero_title: 'Manage Your Microgreens Farm Like a Pro',
+    hero_desc: 'Stop the chaos of spreadsheets. Automate crop planning for restaurant orders.',
+    features_title: 'Why Farmers Choose GreenBatch?',
+    feat_1_title: '📅 Smart Scheduling',
+    feat_1_desc: 'You set the order "5 trays of Peas for Friday", the system tells you exactly when to plant.',
+    feat_2_title: '📉 Economics & Inventory',
+    feat_2_desc: 'Auto-deduct seeds from stock. Track real biological efficiency per tray.',
+    feat_3_title: '📱 Mobile First',
+    feat_3_desc: 'Works perfectly on your phone with wet hands. No more soggy notebooks.',
+    faq_title: 'FAQ',
+    faq_1_q: 'Is it free?',
+    faq_1_a: 'Yes, up to 5 active batches. Enough to test the full grow cycle.',
+    faq_2_q: 'Do I need to print QR codes?',
+    faq_2_a: 'No. You assign permanent numbers to trays (1-100). No printer hassle.',
+    cta_footer: 'Start growing systematically today.',
   }
 }
