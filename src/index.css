@@ -1,0 +1,94 @@
+/* Файл: src/index.css */
+:root {
+  font-family: system-ui, -apple-system, sans-serif;
+  line-height: 1.5;
+  color-scheme: dark;
+  color: rgba(255, 255, 255, 0.9);
+}
+
+body {
+  margin: 0;
+  display: flex;
+  justify-content: center;
+  min-height: 100vh;
+  
+  /* === НОВЫЙ ФОН ДЛЯ ПК === */
+  background-color: #050505; /* Почти черный */
+  
+  /* Сложный градиент: имитация света сверху (Grow Light) */
+  background-image: 
+    radial-gradient(circle at 50% 0%, rgba(74, 222, 128, 0.15) 0%, transparent 60%), /* Центральный зеленый свет */
+    linear-gradient(to bottom, #0a0a0a, #000000); /* Общее затемнение к низу */
+    
+  background-attachment: fixed; /* Фон стоит на месте при скролле */
+}
+
+#root {
+  width: 100%;
+  max-width: 600px; /* Ограничиваем ширину как в мобильном приложении */
+  min-height: 100vh;
+  padding: 20px;
+  box-sizing: border-box;
+  
+  /* === СТИЛЬ ПАНЕЛИ ПРИЛОЖЕНИЯ === */
+  background-color: #121212; /* Цвет самой "панели" */
+  box-shadow: 0 0 50px rgba(0, 0, 0, 0.5); /* Глубокая тень по бокам */
+  border-left: 1px solid #1a1a1a;
+  border-right: 1px solid #1a1a1a;
+}
+
+/* Стили для кнопок */
+button {
+  border-radius: 8px;
+  border: 1px solid transparent;
+  padding: 10px 20px;
+  font-size: 1em;
+  font-weight: 500;
+  background-color: #2c2c2c;
+  color: white;
+  cursor: pointer;
+  transition: 0.2s;
+  width: 100%;
+  margin-top: 10px;
+}
+
+button:hover {
+  background-color: #3a3a3a;
+  border-color: #646cff;
+}
+
+button:disabled {
+  cursor: not-allowed;
+  opacity: 0.6;
+}
+
+/* Поля ввода */
+input, select {
+  width: 100%;
+  padding: 10px;
+  margin-top: 5px;
+  margin-bottom: 15px;
+  border-radius: 6px;
+  border: 1px solid #444;
+  background: #1e1e1e;
+  color: white;
+  box-sizing: border-box; /* Чтобы padding не ломал ширину */
+}
+
+input:focus, select:focus {
+  outline: none;
+  border-color: #4ade80; /* Зеленая обводка при фокусе */
+}
+
+/* Карточки для списков */
+.card {
+  background: #1e1e1e;
+  padding: 15px;
+  border-radius: 10px;
+  border: 1px solid #333;
+  margin-bottom: 10px;
+}
+
+h1, h2, h3 {
+  text-align: center;
+}
