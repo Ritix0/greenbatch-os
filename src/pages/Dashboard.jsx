@@ -6,26 +6,33 @@ import CropsManager from '../components/CropsManager'
 import BatchesManager from '../components/BatchesManager'
 import OrdersManager from '../components/OrdersManager'
 import LegalModal from '../components/LegalModal'
-import { AlertTriangle } from 'lucide-react' // <--- Добавь импорт иконки
+import { AlertTriangle } from 'lucide-react'
 
 export default function Dashboard({ session }) {
   const { t, lang, setLang } = useLanguage()
 
+  // ГЛАВНЫЙ ПУЛЬС: Когда это число меняется, все компоненты обновляют данные
   const [refreshTrigger, setRefreshTrigger] = useState(0)
+
+  // ДАННЫЕ ДЛЯ БЫСТРОЙ ПОСАДКИ (Телепорт из Заказов в Партии)
   const [prefillData, setPrefillData] = useState(null)
-  const [legalView, setLegalView] = useState(null)
   
+  // Состояние для открытия юридических документов (null, 'privacy', 'terms')
+  const [legalView, setLegalView] = useState(null)
+
   // Состояние для модалки удаления аккаунта
   const [showDeleteModal, setShowDeleteModal] = useState(false)
   const [isDeleting, setIsDeleting] = useState(false)
 
+  // Функция, которую мы передадим детям: "Вызови меня, когда что-то изменишь"
   const triggerUpdate = () => {
     setRefreshTrigger(prev => prev + 1)
   }
 
+  // Функция, которую вызывает OrdersManager при нажатии "⚡ Посадить"
   const handleQuickPlant = (data) => {
-    setPrefillData(data)
-    window.scrollTo({ top: 0, behavior: 'smooth' })
+    setPrefillData(data) // Сохраняем данные (ID культуры, кол-во)
+    window.scrollTo({ top: 0, behavior: 'smooth' }) // Прокручиваем наверх к форме
   }
 
   // --- ЛОГИКА УДАЛЕНИЯ АККАУНТА ---
@@ -49,7 +56,7 @@ export default function Dashboard({ session }) {
       // 5. Выходим из системы
       await supabase.auth.signOut()
       
-      // (Опционально: перезагрузка страницы, чтобы выкинуло на логин)
+      // Перезагрузка страницы
       window.location.reload()
 
     } catch (error) {
@@ -61,34 +68,45 @@ export default function Dashboard({ session }) {
 
   return (
     <div style={{ paddingBottom: '30px' }}>
-      {/* ... (HEADER ОСТАЕТСЯ БЕЗ ИЗМЕНЕНИЙ) ... */}
-      <header style={{ 
-        display: 'flex', 
-        justifyContent: 'space-between', 
-        alignItems: 'center', 
-        padding: '15px 0',
-        marginBottom: '20px',
-        borderBottom: '1px solid #333' 
-      }}>
-        <div style={{ fontWeight: 'bold', fontSize: '1.2em' }}>GreenBatch OS</div>
+      
+      {/* --- ОБНОВЛЕННАЯ ШАПКА (С классами для мобильной версии) --- */}
+      <header className="app-header">
+        <div className="header-brand">GreenBatch OS</div>
         
-        <div style={{ display: 'flex', alignItems: 'center', gap: '15px' }}>
+        <div className="header-right">
           
-          <div style={{ display: 'flex', gap: '5px' }}>
-            <button onClick={() => setLang('ru')} style={{ background: lang === 'ru' ? '#646cff' : 'transparent', border: lang === 'ru' ? 'none' : '1px solid #444', padding: '5px 8px', fontSize: '0.75em', width: 'auto' }}>RU</button>
-            <button onClick={() => setLang('en')} style={{ background: lang === 'en' ? '#646cff' : 'transparent', border: lang === 'en' ? 'none' : '1px solid #444', padding: '5px 8px', fontSize: '0.75em', width: 'auto' }}>EN</button>
+          {/* Переключатель языка */}
+          <div className="lang-buttons">
+            <button 
+              onClick={() => setLang('ru')} 
+              className={`lang-btn ${lang === 'ru' ? 'active' : ''}`}
+            >
+              RU
+            </button>
+            <button 
+              onClick={() => setLang('en')} 
+              className={`lang-btn ${lang === 'en' ? 'active' : ''}`}
+            >
+              EN
+            </button>
           </div>
 
-          <div style={{ height: '20px', width: '1px', background: '#444' }}></div>
+          <div className="header-divider"></div>
 
-          <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'flex-end' }}>
-            <span style={{ fontSize: '0.8em', opacity: 0.6 }}>{session.user.email}</span>
-            <button onClick={() => supabase.auth.signOut()} style={{ width: 'auto', padding: '0', fontSize: '0.8em', background: 'transparent', color: '#ef4444', marginTop: '2px', textAlign: 'right', border: 'none' }}>{t('dashboard.logout')}</button>
+          <div className="user-profile">
+            {/* Почта скроется на телефоне благодаря CSS классу user-email */}
+            <span className="user-email">{session.user.email}</span>
+            <button 
+              onClick={() => supabase.auth.signOut()}
+              className="logout-btn"
+            >
+              {t('dashboard.logout')}
+            </button>
           </div>
         </div>
       </header>
 
-       {/* ... (ВСЕ КОМПОНЕНТЫ МЕНЕДЖЕРОВ ОСТАЮТСЯ КАК БЫЛИ) ... */}
+       {/* Активные Партии (Принимают prefillData) */}
        <BatchesManager 
          session={session} 
          onUpdate={triggerUpdate} 
@@ -99,6 +117,7 @@ export default function Dashboard({ session }) {
        
        <hr style={{ borderColor: '#333', margin: '30px 0', opacity: 0.5 }} />
 
+       {/* Постоянные Заказы (Принимают onPlant) */}
        <OrdersManager 
          session={session} 
          onUpdate={triggerUpdate} 
@@ -114,7 +133,7 @@ export default function Dashboard({ session }) {
          refreshTrigger={refreshTrigger}
        />
 
-       {/* --- ОБНОВЛЕННЫЙ ФУТЕР --- */}
+       {/* --- ФУТЕР --- */}
        <footer style={{ marginTop: '50px', display: 'flex', flexDirection: 'column', alignItems: 'center', gap: '15px' }}>
           
           {/* Ссылки на документы */}
@@ -157,7 +176,7 @@ export default function Dashboard({ session }) {
          <LegalModal type={legalView} onClose={() => setLegalView(null)} />
        )}
 
-       {/* МОДАЛКА УДАЛЕНИЯ АККАУНТА (НОВАЯ) */}
+       {/* МОДАЛКА УДАЛЕНИЯ АККАУНТА */}
        {showDeleteModal && (
         <div style={{ position: 'fixed', top: 0, left: 0, right: 0, bottom: 0, background: 'rgba(0,0,0,0.9)', zIndex: 2000, display: 'flex', justifyContent: 'center', alignItems: 'center', padding: '20px' }}>
           <div className="card" style={{ width: '100%', maxWidth: '350px', border: '1px solid #ef4444', textAlign: 'center' }}>

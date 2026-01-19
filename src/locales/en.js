@@ -15,11 +15,11 @@ export const en = {
     close: 'Close',
   },
   auth: {
-    title: 'GreenBatch 🌱',
+    title: 'Log In / Sign Up', // Changed for clarity
     subtitle: 'Microgreens Operating System',
-    email_label: 'Your Email',
+    email_label: 'Enter your Email',
     email_placeholder: 'farmer@example.com',
-    login_btn: 'Get Magic Link',
+    login_btn: 'Log In / Create Account', // Button is now explicit
     sending: 'Sending...',
     success_message: 'Magic link sent! Check your email.',
     check_spam: 'Check Spam folder if not received.',

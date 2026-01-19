@@ -92,3 +92,94 @@ input:focus, select:focus {
 h1, h2, h3 {
   text-align: center;
 }
+
+/* --- Файл: src/index.css (Добавить в конец) --- */
+
+/* Стили шапки */
+.app-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 15px 0;
+  margin-bottom: 20px;
+  border-bottom: 1px solid #333;
+}
+
+.header-brand {
+  font-weight: bold;
+  font-size: 1.2em;
+  white-space: nowrap; /* Запрет переноса текста заголовка */
+}
+
+.header-right {
+  display: flex;
+  align-items: center;
+  gap: 15px;
+}
+
+.lang-buttons {
+  display: flex;
+  gap: 5px;
+}
+
+.lang-btn {
+  background: transparent;
+  border: 1px solid #444;
+  padding: 5px 8px;
+  font-size: 0.75em;
+  width: auto;
+  margin: 0; /* Убираем лишние отступы */
+}
+
+.lang-btn.active {
+  background: #646cff;
+  border: none;
+}
+
+.header-divider {
+  height: 20px;
+  width: 1px;
+  background: #444;
+}
+
+.user-profile {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+}
+
+.user-email {
+  font-size: 0.8em;
+  opacity: 0.6;
+}
+
+.logout-btn {
+  width: auto;
+  padding: 0;
+  font-size: 0.8em;
+  background: transparent;
+  color: #ef4444;
+  margin-top: 2px;
+  text-align: right;
+  border: none;
+}
+
+/* === МОБИЛЬНАЯ АДАПТАЦИЯ === */
+@media (max-width: 600px) {
+  .user-email {
+    display: none; /* Скрываем длинную почту на телефоне */
+  }
+  
+  .header-brand {
+    font-size: 1em; /* Чуть уменьшаем заголовок */
+  }
+  
+  .header-right {
+    gap: 10px; /* Уменьшаем отступы между кнопками */
+  }
+  
+  /* Выравниваем кнопки языка */
+  .lang-buttons {
+    align-items: center;
+  }
+}
